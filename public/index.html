@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en" class="light-theme">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cloud Egress Fees (2026 Live) — S3, Zero-Egress &amp; Bandwidth FinOps Calculator</title>
+  <meta name="description" content="Compare live cloud egress fees and object storage pricing across 18 providers (AWS S3, GCP, Azure, Cloudflare R2, Wasabi, Backblaze B2, Tigris, Storj, Hetzner, Bunny.net). Calculate instant FinOps annual egress savings." />
+  <link rel="canonical" href="https://cloudegressfees.com/" />
+  <meta property="og:title" content="Cloud Egress Fees — Live 18-Cloud Bandwidth &amp; Zero-Egress Storage Calculator" />
+  <meta property="og:description" content="Calculate your exact monthly &amp; annual cloud storage + outbound bandwidth bill across AWS S3, Cloudflare R2, Wasabi, Backblaze B2, Tigris, Storj, Hetzner &amp; 11 more clouds." />
+  <meta property="og:url" content="https://cloudegressfees.com/" />
+  <meta property="og:type" content="website" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Dataset",
+        "name": "Cloud Egress Fees & Zero-Egress Object Storage Pricing Index (18 Providers)",
+        "description": "Normalized per-GB storage rates, outbound internet egress fees, free-tier multipliers, and policy caveats across 18 cloud object storage, S3-compatible, and CDN providers.",
+        "url": "https://cloudegressfees.com/",
+        "distribution": {
+          "@type": "DataDownload",
+          "encodingFormat": "application/json",
+          "contentUrl": "https://cloudegressfees.com/egress_fees.json"
+        },
+        "keywords": [
+          "cloud egress fees",
+          "cloud egress calculator",
+          "aws s3 egress pricing",
+          "zero egress cloud storage",
+          "cloudflare r2 vs aws s3",
+          "wasabi vs backblaze b2 egress"
+        ]
+      },
+      {
+        "@type": "WebApplication",
+        "name": "CloudEgressFees.com FinOps Egress Escape Calculator",
+        "url": "https://cloudegressfees.com/",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "All",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --surface-alt: #0b1220;
+      --border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --row-hover: rgba(56, 189, 248, 0.07);
+      --savings-text: #86efac;
+      --danger-text: #fca5a5;
+    }
+    html.light-theme, body.light-theme {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface-alt: #f1f5f9;
+      --border: #cbd5e1;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --accent: #0369a1;
+      --row-hover: #f1f5f9;
+      --savings-text: #166534;
+      --danger-text: #991b1b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .hidden-stage { display: none !important; }
+
+    .acq-banner {
+      background: #fef9c3;
+      color: #0f172a;
+      border-bottom: 1px solid #eab308;
+      padding: 9px 20px;
+      font-size: 0.83rem;
+      font-weight: 700;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .acq-cta {
+      background: #0f172a;
+      color: #ffffff;
+      border: 1px solid #0f172a;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.77rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 13px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .brand h1 { margin: 0; font-size: 1.24rem; font-weight: 900; letter-spacing: -0.02em; color: var(--text); }
+    .brand-dot { color: var(--accent); }
+    .topbar-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+
+    /* High-contrast lime badges (Zero Invisible Pastel Text compliant) */
+    .live-pill, .badge-zero {
+      background: #d9f99d;
+      color: #1a2e05;
+      border: 1px solid #65a30d;
+      padding: 2px 9px;
+      border-radius: 999px;
+      font-size: 0.73rem;
+      font-weight: 800;
+      display: inline-block;
+      white-space: nowrap;
+    }
+    html.light-theme .live-pill, html.light-theme .badge-zero,
+    body.light-theme .live-pill, body.light-theme .badge-zero {
+      background: #d9f99d;
+      color: #1a2e05;
+      border: 1px solid #65a30d;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .badge-low { background: #064e3b; color: #a7f3d0; border: 1px solid #10b981; }
+    html.light-theme .badge-low, body.light-theme .badge-low { background: #d1fae5; color: #065f46; border: 1px solid #10b981; }
+
+    .badge-hyper { background: #451a03; color: #fde68a; border: 1px solid #f59e0b; }
+    html.light-theme .badge-hyper, body.light-theme .badge-hyper { background: #fef3c7; color: #92400e; border: 1px solid #d97706; }
+
+    .badge-eu { background: #1e3a8a; color: #dbeafe; border: 1px solid #3b82f6; }
+    html.light-theme .badge-eu, body.light-theme .badge-eu { background: #dbeafe; color: #1e40af; border: 1px solid #3b82f6; }
+
+    .badge-warn { background: #7f1d1d; color: #fecaca; border: 1px solid #ef4444; }
+    html.light-theme .badge-warn, body.light-theme .badge-warn { background: #fee2e2; color: #991b1b; border: 1px solid #ef4444; }
+
+    .badge-ok { background: #1e293b; color: #cbd5e1; border: 1px solid #64748b; }
+    html.light-theme .badge-ok, body.light-theme .badge-ok { background: #f1f5f9; color: #334155; border: 1px solid #94a3b8; }
+
+    .btn {
+      background: var(--surface-alt);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 7px 13px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn:hover { border-color: var(--accent); }
+    .btn-primary { background: #0284c7; color: #ffffff; border-color: #0284c7; }
+    html.light-theme .btn-primary, body.light-theme .btn-primary { background: #0f172a; color: #ffffff; border-color: #0f172a; }
+
+    .container { max-width: 1380px; margin: 22px auto 64px; padding: 0 20px; }
+    .hero { margin-bottom: 18px; }
+    .hero h2 { margin: 0 0 6px; font-size: 1.56rem; font-weight: 900; letter-spacing: -0.02em; color: var(--text); }
+    .hero p { margin: 0; color: var(--text-muted); font-size: 0.93rem; }
+    .muted-sm { font-size: 0.76rem; color: var(--text-muted); }
+    .muted-xs { font-size: 0.73rem; color: var(--text-muted); margin-top: 3px; }
+    .accent-link { color: var(--accent); text-decoration: none; font-weight: 800; }
+    .accent-link:hover { text-decoration: underline; }
+    .val-savings { color: var(--savings-text); font-weight: 900; }
+    .val-danger { color: var(--danger-text); font-weight: 800; }
+
+    .calc-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin-bottom: 20px;
+    }
+    .calc-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .calc-title { font-size: 1.02rem; font-weight: 900; color: var(--text); }
+    .preset-row { display: flex; flex-wrap: wrap; gap: 7px; }
+    .preset-btn {
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface-alt);
+      color: var(--text);
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .preset-btn:hover, .preset-btn.active { border-color: var(--accent); }
+
+    .slider-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .slider-box {
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+    }
+    .slider-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .slider-top label { font-size: 0.82rem; font-weight: 800; color: var(--text); }
+    .num-wrap { display: inline-flex; align-items: center; gap: 5px; font-size: 0.82rem; font-weight: 800; color: var(--text); }
+    .num-input {
+      width: 92px;
+      padding: 5px 8px;
+      border-radius: 7px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 0.88rem;
+      font-weight: 800;
+      text-align: right;
+    }
+    .range-input { width: 100%; accent-color: var(--accent); cursor: pointer; }
+
+    .kpi-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+      gap: 11px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+    .kcard {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      padding: 12px 14px;
+    }
+    .kcard-highlight { border: 2px solid #65a30d; }
+    .kcard-lbl { font-size: 0.75rem; font-weight: 800; color: var(--text-muted); display: flex; justify-content: space-between; align-items: center; gap: 6px; }
+    .kcard-val { font-size: 1.38rem; font-weight: 900; margin: 4px 0 2px; color: var(--text); }
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .filter-group { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+    .ctrl-input {
+      padding: 8px 11px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+    .ctrl-input::placeholder { color: var(--text-muted); opacity: 0.9; }
+    .chk-label { display: inline-flex; align-items: center; gap: 6px; font-size: 0.82rem; font-weight: 700; color: var(--text); cursor: pointer; }
+
+    .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); }
+    table { width: 100%; border-collapse: collapse; min-width: 920px; }
+    th, td {
+      padding: 11px 13px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.84rem;
+      color: var(--text);
+      vertical-align: top;
+    }
+    th {
+      background: var(--surface-alt);
+      font-size: 0.76rem;
+      font-weight: 800;
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+    }
+    th:hover { color: var(--accent); }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--row-hover); }
+    .price-strong { font-size: 1.02rem; font-weight: 900; color: var(--text); }
+    .policy-text { font-size: 0.77rem; color: var(--text-muted); max-width: 360px; line-height: 1.42; }
+
+    .faq-section {
+      margin-top: 26px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+    }
+    .faq-section h3 { margin: 0 0 12px; font-size: 1.05rem; color: var(--text); }
+    .faq-item { margin-bottom: 12px; font-size: 0.86rem; color: var(--text); }
+    .faq-item:last-child { margin-bottom: 0; }
+    .faq-item p { margin: 4px 0 0; color: var(--text-muted); }
+
+    .footer {
+      margin-top: 26px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-align: center;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.65);
+      z-index: 90;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal-card {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      max-width: 630px;
+      width: 100%;
+      padding: 22px 24px;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.28);
+    }
+    .modal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .modal-head h3 { margin: 0; font-size: 1.15rem; color: var(--text); }
+    .modal-list { font-size: 0.85rem; padding-left: 18px; line-height: 1.65; color: var(--text); }
+    .modal-price-box {
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      margin: 14px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .modal-bin { font-size: 1.35rem; font-weight: 900; color: var(--text); }
+  </style>
+</head>
+<body class="light-theme">
+  <div id="acq-top-banner" class="acq-banner hidden-stage">
+    <span>💸 <strong>Turnkey FinOps Digital Asset Available:</strong> Acquire <code>CloudEgressFees.com</code> (Exact-Match Commercial Domain + Automated 18-Cloud Egress Index &amp; Calculator).</span>
+    <button class="acq-cta" onclick="openModal(true)">View Turnkey Package ($1,488) →</button>
+  </div>
+
+  <header class="topbar">
+    <div class="brand">
+      <h1>💸 CloudEgressFees<span class="brand-dot">.com</span></h1>
+      <span class="live-pill">ZERO-EGRESS &amp; S3 FINOPS INDEX · 18 CLOUDS</span>
+      <span id="updated-stamp" class="muted-sm">Loading live pricing telemetry...</span>
+    </div>
+    <div class="topbar-actions">
+      <button class="btn" onclick="exportCsv()">📥 Export CSV</button>
+      <button id="acq-nav-btn" class="btn btn-primary hidden-stage" onclick="openModal(true)">💼 Acquire Site</button>
+      <button id="theme-btn" class="btn" onclick="toggleTheme()">🌙 Dark</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h2>Cloud Egress Fees &amp; Zero-Egress S3 Storage Calculator</h2>
+      <p>Side-by-side outbound internet bandwidth fees (<code>$/GB</code>), storage rates, hidden retention/ratio rules, and live FinOps savings across 18 Object Storage, CDN, and Hyperscaler clouds.</p>
+    </section>
+
+    <section class="calc-panel" aria-label="Cloud Egress Escape & FinOps Savings Calculator">
+      <div class="calc-header">
+        <span class="calc-title">🧮 Interactive Cloud Egress Escape &amp; FinOps Savings Calculator</span>
+        <div class="preset-row">
+          <button class="preset-btn" onclick="applyPreset(20, 50)">SaaS / Media Default (20 TB · 50 TB/mo)</button>
+          <button class="preset-btn" onclick="applyPreset(10, 50)">AI Weights Hub (10 TB · 50 TB/mo)</button>
+          <button class="preset-btn" onclick="applyPreset(50, 200)">Video / CDN Origin (50 TB · 200 TB/mo)</button>
+          <button class="preset-btn" onclick="applyPreset(20, 80)">High-Read 4× Test (20 TB · 80 TB/mo)</button>
+          <button class="preset-btn" onclick="applyPreset(100, 10)">Backup Lake (100 TB · 10 TB/mo)</button>
+        </div>
+      </div>
+
+      <div class="slider-grid">
+        <div class="slider-box">
+          <div class="slider-top">
+            <label for="num-stored">📦 Active Stored Data (TB)</label>
+            <span class="num-wrap">
+              <input id="num-stored" class="num-input" type="number" min="0.1" max="10000" step="1" value="20" oninput="syncInputs('stored', 'num')" />
+              <span>TB</span>
+            </span>
+          </div>
+          <input id="rng-stored" class="range-input" type="range" min="1" max="500" step="1" value="20" oninput="syncInputs('stored', 'rng')" />
+          <div class="muted-xs">1 TB = 1,000 GB decimal cloud billing unit (default: 20 TB = 20,000 GB)</div>
+        </div>
+
+        <div class="slider-box">
+          <div class="slider-top">
+            <label for="num-egress">🌐 Monthly Outbound Bandwidth / Egress (TB/mo)</label>
+            <span class="num-wrap">
+              <input id="num-egress" class="num-input" type="number" min="0" max="10000" step="1" value="50" oninput="syncInputs('egress', 'num')" />
+              <span>TB/mo</span>
+            </span>
+          </div>
+          <input id="rng-egress" class="range-input" type="range" min="0" max="500" step="1" value="50" oninput="syncInputs('egress', 'rng')" />
+          <div id="ratio-indicator" class="muted-xs">Egress-to-Storage Ratio: 2.5× monthly stored volume</div>
+        </div>
+      </div>
+
+      <div class="kpi-cards">
+        <div class="kcard">
+          <div class="kcard-lbl"><span>AWS S3 Standard Bill</span><span class="badge badge-hyper">Baseline</span></div>
+          <div id="kpi-aws-mo" class="kcard-val">$4,951/mo</div>
+          <div id="kpi-aws-yr" class="muted-xs">$59,412/yr ($4,960/mo pre-100GB free)</div>
+        </div>
+        <div class="kcard">
+          <div class="kcard-lbl"><span>Cloudflare R2 (S3)</span><span class="badge-zero">ZERO EGRESS</span></div>
+          <div id="kpi-r2-mo" class="kcard-val">$300/mo</div>
+          <div id="kpi-r2-yr" class="muted-xs">$3,600/yr · No egress ratio cap</div>
+        </div>
+        <div class="kcard">
+          <div class="kcard-lbl"><span>Wasabi Hot Storage</span><span class="badge-zero">ZERO EGRESS*</span></div>
+          <div id="kpi-wasabi-mo" class="kcard-val">$140/mo</div>
+          <div id="kpi-wasabi-yr" class="muted-xs">$1,678/yr · 90-day min retention</div>
+        </div>
+        <div class="kcard">
+          <div class="kcard-lbl"><span>Backblaze B2 (3× Free)</span><span class="badge-zero">ZERO EGRESS*</span></div>
+          <div id="kpi-b2-mo" class="kcard-val">$120/mo</div>
+          <div id="kpi-b2-yr" class="muted-xs">$1,440/yr · Free up to 3× stored</div>
+        </div>
+        <div class="kcard kcard-highlight">
+          <div class="kcard-lbl"><span>Max Annual FinOps Savings</span><span class="badge badge-low">vs AWS S3</span></div>
+          <div id="kpi-save-yr" class="kcard-val val-savings">$57,972/yr</div>
+          <div id="kpi-save-sub" class="muted-xs">97.6% lower annual TCO</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="filter-bar" aria-label="Comparison Filters">
+      <div class="filter-group">
+        <select id="flt-cat" class="ctrl-input" onchange="renderTable()">
+          <option value="ALL">All 18 Cloud &amp; CDN Providers</option>
+          <option value="ZERO">Zero-Egress ($0.00/GB) Providers</option>
+          <option value="LOW">Low-Egress (&lt;= $0.011/GB) Clouds</option>
+          <option value="CDN">CDN &amp; Edge Storage</option>
+          <option value="EU">EU Sovereign / GDPR Clouds</option>
+          <option value="HYPER">Hyperscalers (AWS / GCP / Azure)</option>
+        </select>
+        <label class="chk-label">
+          <input id="flt-s3" type="checkbox" onchange="renderTable()" />
+          🔌 S3-Compatible API Only
+        </label>
+      </div>
+      <div class="filter-group">
+        <input id="flt-search" class="ctrl-input" type="text" placeholder="Search R2, Wasabi, 90-day, 3x, EU..." oninput="renderTable()" />
+        <span id="row-count-lbl" class="muted-sm">18 providers</span>
+      </div>
+    </section>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th onclick="setSort('name')">Provider &amp; Category <span id="sort-name"></span></th>
+            <th onclick="setSort('storage_per_gb')">Storage Rate <span id="sort-storage_per_gb"></span></th>
+            <th onclick="setSort('egress_per_gb')">Internet Egress Rate <span id="sort-egress_per_gb"></span></th>
+            <th onclick="setSort('monthly_usd')">Monthly Bill <span id="sort-monthly_usd">▲</span></th>
+            <th onclick="setSort('annual_usd')">Annual Total <span id="sort-annual_usd"></span></th>
+            <th onclick="setSort('savings_yr')">Annual Savings vs AWS <span id="sort-savings_yr"></span></th>
+            <th>Objective FinOps Policy &amp; Caveats</th>
+          </tr>
+        </thead>
+        <tbody id="matrix-tbody">
+          <tr><td colspan="7" class="muted-sm">Loading verified cloud egress rates...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <section class="faq-section">
+      <h3>FinOps Engineering Notes — Cloud Egress Fees &amp; Policy Caveats</h3>
+      <div class="faq-item">
+        <strong>1. Why do AWS S3 ($0.09/GB), GCP ($0.12/GB), and Azure ($0.087/GB) bills spike on read-heavy workloads?</strong>
+        <p>At 20 TB stored and 50 TB/mo outbound internet egress, storage on AWS S3 costs just $460/mo while outbound bandwidth adds $4,491/mo ($4,951/mo total after 100 GB free, or $4,960/mo unadjusted — nearly $60,000/yr). Switching read-heavy public assets, AI checkpoints, or media origins to zero-egress S3-compatible storage cuts annual spend by $55,000–$57,972/yr.</p>
+      </div>
+      <div class="faq-item">
+        <strong>2. What are the hidden engineering caveats behind "$0.00/GB Zero Egress" clouds?</strong>
+        <p><strong>90-Day Minimum Retention (Wasabi / Impossible Cloud):</strong> Objects deleted or overwritten before 30–90 days are still billed for the remaining retention window—ideal for backups/media, costly for high-churn temp files. <strong>3× Stored Multiplier (Backblaze B2):</strong> Direct egress is free up to 3× your average monthly stored volume ($0.01/GB beyond), or unlimited $0 when fronted by Cloudflare, Fastly, or Bunny CDN. <strong>Class A/B Operations (Cloudflare R2):</strong> R2 charges $0 egress at any ratio, but high-frequency small-file <code>PUT/LIST</code> ($4.50/million) and <code>GET</code> ($0.36/million) calls should be batched or cached.</p>
+      </div>
+      <div class="faq-item">
+        <strong>3. How is live telemetry verified?</strong>
+        <p>Every 6 hours via GitHub Actions, <code>sync_egress_fees.py</code> queries the public AWS Price List API (<code>AmazonS3/current/region_index.json</code>) for offer publication metadata and probes official pricing/API endpoints across all 18 providers, archiving daily snapshots under <code>/history/YYYY-MM-DD.json</code>.</p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div>Methodology: 1 TB = 1,000 GB standard decimal billing unit. Rates reflect published North America / Europe standard public tiers excluding enterprise private commits, request/operation charges (PUT/GET/LIST), and regional taxes. Verify retention, fair-use ratios, and SLA terms directly with each vendor.</div>
+      <div class="muted-xs">Independent cloud storage &amp; bandwidth FinOps index. All provider names and trademarks belong to their respective owners; CloudEgressFees.com is not affiliated with or endorsed by any listed cloud provider. <span id="acq-footer-link" class="hidden-stage">· <a href="#acquire" class="accent-link" onclick="openModal(true);return false;">Acquire CloudEgressFees.com ($1,488)</a></span></div>
+    </footer>
+  </main>
+
+  <div id="acq-modal" class="modal-backdrop" onclick="if(event.target===this) openModal(false)">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h3>💼 Acquire CloudEgressFees.com (Turnkey FinOps Asset)</h3>
+        <button class="btn" onclick="openModal(false)">✕ Close</button>
+      </div>
+      <p class="muted-sm">
+        Built for Zero-Egress S3 Storage providers, CDN platforms, FinOps SaaS teams, or B2B cloud infrastructure media operators.
+      </p>
+      <ul class="modal-list">
+        <li><strong>Exact-Match Commercial Domain:</strong> <code>CloudEgressFees.com</code> (high-intent B2B FinOps keyword targeting enterprises escaping hyperscaler bandwidth bills).</li>
+        <li><strong>Zero-Server Architecture (<code>$0/mo</code> Hosting):</strong> Static HTML/CSS/JS calculator + automated 6-hour GitHub Actions Python stdlib pipeline tracking 18 cloud storage &amp; CDN providers.</li>
+        <li><strong>Clean Handover:</strong> Instant Dynadot push / Auth-Code + full GitHub repository &amp; daily JSON history archive via Spaceship Buyer Protection or Escrow.com. Contact: <a class="accent-link" href="mailto:acquire@cloudegressfees.com">acquire@cloudegressfees.com</a>.</li>
+      </ul>
+      <div class="modal-price-box">
+        <div>
+          <div class="muted-sm">Turnkey Buy-It-Now (Domain + Full Codebase)</div>
+          <div class="modal-bin">$1,488 USD <span class="muted-sm">(Spaceship / Escrow)</span></div>
+        </div>
+        <button class="btn btn-primary" onclick="copyInquiry()">📋 Copy Inquiry to acquire@cloudegressfees.com</button>
+      </div>
+      <div id="copy-msg" class="muted-sm"></div>
+    </div>
+  </div>
+
+  <script>
+    const SALE_STAGE = new URLSearchParams(window.location.search).get("sale") === "1" ? "FULL_SALE" : "LAUNCH_CLEAN";
+    let DATA = { providers: [], summary: {}, aws_price_list_telemetry: {} };
+    let SORT_KEY = "monthly_usd";
+    let SORT_ASC = true;
+
+    function applySaleStage() {
+      if (SALE_STAGE === "FULL_SALE") {
+        document.getElementById("acq-top-banner").classList.remove("hidden-stage");
+        document.getElementById("acq-nav-btn").classList.remove("hidden-stage");
+        document.getElementById("acq-footer-link").classList.remove("hidden-stage");
+      }
+    }
+
+    function applyTheme() {
+      const saved = localStorage.getItem("cloudegressfees_theme") || "light";
+      const isDark = saved === "dark";
+      document.documentElement.classList.toggle("light-theme", !isDark);
+      document.body.classList.toggle("light-theme", !isDark);
+      const btn = document.getElementById("theme-btn");
+      if (btn) btn.textContent = isDark ? "☀️ Light" : "🌙 Dark";
+    }
+
+    function toggleTheme() {
+      const isLight = document.documentElement.classList.contains("light-theme");
+      localStorage.setItem("cloudegressfees_theme", isLight ? "dark" : "light");
+      applyTheme();
+    }
+
+    function openModal(show) {
+      document.getElementById("acq-modal").classList.toggle("open", !!show);
+    }
+
+    function copyInquiry() {
+      const txt = "To: acquire@cloudegressfees.com\nSubject: Acquisition Inquiry — CloudEgressFees.com ($1,488 Turnkey Bundle)\n\nHello,\nWe are interested in acquiring CloudEgressFees.com (domain + 18-cloud egress calculator & automated GitHub Actions pipeline). Please share the Spaceship / Escrow.com checkout link.";
+      navigator.clipboard.writeText(txt);
+      document.getElementById("copy-msg").textContent = "✅ Copied inquiry for acquire@cloudegressfees.com (Spaceship / Escrow ready).";
+    }
+
+    function esc(s) {
+      return String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+    }
+
+    function fmtUsd(n, decimals = 0) {
+      return "$" + Number(n || 0).toLocaleString("en-US", {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals
+      });
+    }
+
+    function calcBill(p, storedTb, egressTb) {
+      const storedGb = Math.max(0, storedTb * 1000);
+      const egressGb = Math.max(0, egressTb * 1000);
+      const baseUsd = (storedGb > 0 || egressGb > 0) ? Number(p.base_monthly_usd || 0) : 0;
+      const billableStorageGb = Math.max(0, storedGb - Number(p.included_storage_gb || 0));
+      const storageUsd = baseUsd + billableStorageGb * Number(p.storage_per_gb || 0);
+
+      const mult = Number(p.free_egress_mult || 0);
+      const freeCapGb = mult > 0 ? (storedGb * mult) : Number(p.free_egress_gb || 0);
+      const overageGb = Math.max(0, egressGb - freeCapGb);
+      const egressUsd = overageGb * Number(p.egress_per_gb || 0);
+      const monthlyUsd = storageUsd + egressUsd;
+      const annualUsd = monthlyUsd * 12;
+
+      let dynamicWarning = "";
+      if (mult > 0 && overageGb > 0) {
+        dynamicWarning = `${(overageGb / 1000).toFixed(1)} TB above ${mult}× free cap (+$${Number(p.egress_per_gb).toFixed(3)}/GB applied)`;
+      } else if (Number(p.fair_use_mult || 0) > 0 && storedGb > 0 && egressGb > storedGb * Number(p.fair_use_mult)) {
+        dynamicWarning = `Egress (${egressTb} TB) > ${p.fair_use_mult}:1 active storage fair-use policy`;
+      }
+      return { storageUsd, egressUsd, monthlyUsd, annualUsd, overageGb, dynamicWarning };
+    }
+
+    function getInputs() {
+      const storedTb = Math.max(0, parseFloat(document.getElementById("num-stored").value || "20"));
+      const egressTb = Math.max(0, parseFloat(document.getElementById("num-egress").value || "50"));
+      return { storedTb, egressTb };
+    }
+
+    function syncInputs(which, source) {
+      const numEl = document.getElementById(which === "stored" ? "num-stored" : "num-egress");
+      const rngEl = document.getElementById(which === "stored" ? "rng-stored" : "rng-egress");
+      if (source === "rng") {
+        numEl.value = rngEl.value;
+      } else {
+        const v = Math.max(0, parseFloat(numEl.value || "0"));
+        rngEl.value = String(Math.min(500, v));
+      }
+      recalculateAll();
+    }
+
+    function applyPreset(storedTb, egressTb) {
+      document.getElementById("num-stored").value = String(storedTb);
+      document.getElementById("rng-stored").value = String(Math.min(500, storedTb));
+      document.getElementById("num-egress").value = String(egressTb);
+      document.getElementById("rng-egress").value = String(Math.min(500, egressTb));
+      recalculateAll();
+    }
+
+    function setSort(key) {
+      if (SORT_KEY === key) {
+        SORT_ASC = !SORT_ASC;
+      } else {
+        SORT_KEY = key;
+        SORT_ASC = key !== "savings_yr";
+      }
+      ["name", "storage_per_gb", "egress_per_gb", "monthly_usd", "annual_usd", "savings_yr"].forEach(k => {
+        const el = document.getElementById("sort-" + k);
+        if (el) el.textContent = k === SORT_KEY ? (SORT_ASC ? "▲" : "▼") : "";
+      });
+      renderTable();
+    }
+
+    function recalculateAll() {
+      const { storedTb, egressTb } = getInputs();
+      const ratio = storedTb > 0 ? (egressTb / storedTb).toFixed(1) : "0.0";
+      document.getElementById("ratio-indicator").textContent =
+        `Egress-to-Storage Ratio: ${ratio}× monthly stored volume (${(egressTb * 1000).toLocaleString()} GB outbound)`;
+
+      const byId = {};
+      (DATA.providers || []).forEach(p => { byId[p.id] = p; });
+      const aws = byId["aws_s3"];
+      const r2 = byId["cloudflare_r2"];
+      const wasabi = byId["wasabi"];
+      const b2 = byId["backblaze_b2"];
+
+      if (aws) {
+        const awsB = calcBill(aws, storedTb, egressTb);
+        const rawNoFree = (storedTb * 1000 * 0.023) + (egressTb * 1000 * 0.09);
+        document.getElementById("kpi-aws-mo").textContent = `${fmtUsd(Math.round(awsB.monthlyUsd))}/mo`;
+        document.getElementById("kpi-aws-yr").textContent = `${fmtUsd(Math.round(awsB.annualUsd))}/yr (${fmtUsd(Math.round(rawNoFree))}/mo pre-free-tier)`;
+
+        if (r2) {
+          const r2B = calcBill(r2, storedTb, egressTb);
+          document.getElementById("kpi-r2-mo").textContent = `${fmtUsd(Math.round(r2B.monthlyUsd))}/mo`;
+          document.getElementById("kpi-r2-yr").textContent = `${fmtUsd(Math.round(r2B.annualUsd))}/yr · Save ${fmtUsd(Math.max(0, Math.round(awsB.annualUsd - r2B.annualUsd)))}/yr`;
+        }
+        if (wasabi) {
+          const wB = calcBill(wasabi, storedTb, egressTb);
+          document.getElementById("kpi-wasabi-mo").textContent = `${fmtUsd(Math.round(wB.monthlyUsd))}/mo`;
+          document.getElementById("kpi-wasabi-yr").textContent = wB.dynamicWarning
+            ? `${fmtUsd(Math.round(wB.annualUsd))}/yr · Check 1:1 fair-use`
+            : `${fmtUsd(Math.round(wB.annualUsd))}/yr · 90-day min retention`;
+        }
+        if (b2) {
+          const b2B = calcBill(b2, storedTb, egressTb);
+          document.getElementById("kpi-b2-mo").textContent = `${fmtUsd(Math.round(b2B.monthlyUsd))}/mo`;
+          document.getElementById("kpi-b2-yr").textContent = b2B.overageGb > 0
+            ? `${fmtUsd(Math.round(b2B.annualUsd))}/yr · Includes 3× overage`
+            : `${fmtUsd(Math.round(b2B.annualUsd))}/yr · Within ${(storedTb * 3).toFixed(0)} TB free cap`;
+        }
+
+        const allBills = (DATA.providers || []).map(p => ({ p, bill: calcBill(p, storedTb, egressTb) }));
+        allBills.sort((a, b) => a.bill.monthlyUsd - b.bill.monthlyUsd);
+        if (allBills.length > 0) {
+          const best = allBills[0];
+          const maxSaveYr = Math.max(0, awsB.annualUsd - best.bill.annualUsd);
+          const savePct = awsB.annualUsd > 0 ? ((maxSaveYr / awsB.annualUsd) * 100).toFixed(1) : "0.0";
+          document.getElementById("kpi-save-yr").textContent = `${fmtUsd(Math.round(maxSaveYr))}/yr`;
+          document.getElementById("kpi-save-sub").textContent = `${savePct}% saved via ${best.p.name}`;
+        }
+      }
+      renderTable();
+    }
+
+    function renderTable() {
+      const { storedTb, egressTb } = getInputs();
+      const fCat = document.getElementById("flt-cat").value;
+      const fS3 = document.getElementById("flt-s3").checked;
+      const fQ = (document.getElementById("flt-search").value || "").trim().toLowerCase();
+
+      const awsP = (DATA.providers || []).find(x => x.id === "aws_s3");
+      const awsBill = awsP ? calcBill(awsP, storedTb, egressTb) : { monthlyUsd: 0, annualUsd: 0 };
+
+      let rows = (DATA.providers || []).map(p => {
+        const bill = calcBill(p, storedTb, egressTb);
+        const savingsYr = awsBill.annualUsd - bill.annualUsd;
+        const savingsPct = awsBill.annualUsd > 0 ? Math.round((savingsYr / awsBill.annualUsd) * 100) : 0;
+        return { ...p, bill, savingsYr, savingsPct };
+      }).filter(r => {
+        if (fCat === "ZERO" && !r.zero_egress) return false;
+        if (fCat === "LOW" && (r.zero_egress || r.category === "Hyperscaler")) return false;
+        if (fCat === "CDN" && r.category !== "CDN & Edge Storage") return false;
+        if (fCat === "EU" && !r.eu_sovereign) return false;
+        if (fCat === "HYPER" && r.category !== "Hyperscaler") return false;
+        if (fS3 && !r.s3_compatible) return false;
+        if (fQ) {
+          const hay = `${r.name} ${r.category} ${r.egress_label} ${r.policy_note}`.toLowerCase();
+          if (!hay.includes(fQ)) return false;
+        }
+        return true;
+      });
+
+      rows.sort((a, b) => {
+        let va, vb;
+        if (SORT_KEY === "name") {
+          return SORT_ASC ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
+        } else if (SORT_KEY === "storage_per_gb") {
+          va = a.storage_per_gb; vb = b.storage_per_gb;
+        } else if (SORT_KEY === "egress_per_gb") {
+          va = a.zero_egress && a.bill.egressUsd === 0 ? 0 : a.egress_per_gb;
+          vb = b.zero_egress && b.bill.egressUsd === 0 ? 0 : b.egress_per_gb;
+        } else if (SORT_KEY === "annual_usd") {
+          va = a.bill.annualUsd; vb = b.bill.annualUsd;
+        } else if (SORT_KEY === "savings_yr") {
+          va = a.savingsYr; vb = b.savingsYr;
+        } else {
+          va = a.bill.monthlyUsd; vb = b.bill.monthlyUsd;
+        }
+        return SORT_ASC ? (va - vb) : (vb - va);
+      });
+
+      document.getElementById("row-count-lbl").textContent = `${rows.length} of ${(DATA.providers || []).length} providers`;
+      const tbody = document.getElementById("matrix-tbody");
+      if (!rows.length) {
+        tbody.innerHTML = `<tr><td colspan="7" class="muted-sm">No providers match your current filter.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = rows.map(r => {
+        const catBadge = r.zero_egress
+          ? `<span class="badge-zero">ZERO EGRESS</span>`
+          : (r.category === "Hyperscaler"
+              ? `<span class="badge badge-hyper">Hyperscaler</span>`
+              : `<span class="badge badge-low">${esc(r.category)}</span>`);
+        const euBadge = r.eu_sovereign ? ` <span class="badge badge-eu">EU / GDPR</span>` : "";
+        const s3Badge = r.s3_compatible ? ` <span class="badge badge-ok">S3 API</span>` : "";
+        const liveBadge = r.verified_live ? `<span class="muted-xs">🟢 HTTP ${r.probe_http_status} (${r.probe_latency_ms}ms)</span>` : "";
+
+        let savHtml = `<span class="muted-sm">Baseline (AWS S3)</span>`;
+        if (r.id !== "aws_s3") {
+          if (r.savingsYr >= 0) {
+            savHtml = `<div class="val-savings">+${fmtUsd(Math.round(r.savingsYr))}/yr</div><div class="muted-xs">Save ${r.savingsPct}% vs AWS</div>`;
+          } else {
+            savHtml = `<div class="val-danger">-${fmtUsd(Math.round(Math.abs(r.savingsYr)))}/yr</div><div class="muted-xs">Higher than AWS S3</div>`;
+          }
+        }
+
+        const dynWarnHtml = r.bill.dynamicWarning
+          ? `<div class="muted-xs"><span class="badge badge-warn">⚠️ ${esc(r.bill.dynamicWarning)}</span></div>`
+          : "";
+
+        return `
+          <tr>
+            <td>
+              <div><a class="accent-link" href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.name)} ↗</a></div>
+              <div class="muted-xs">${catBadge}${euBadge}${s3Badge}</div>
+              ${liveBadge}
+            </td>
+            <td>
+              <div class="price-strong">$${Number(r.storage_per_gb).toFixed(4).replace(/0+$/, "").replace(/\.$/, "")}/GB</div>
+              <div class="muted-xs">${fmtUsd(r.bill.storageUsd, 2)}/mo storage</div>
+            </td>
+            <td>
+              <div><strong>${esc(r.egress_label)}</strong></div>
+              <div class="muted-xs">${fmtUsd(r.bill.egressUsd, 2)}/mo bandwidth</div>
+            </td>
+            <td>
+              <div class="price-strong">${fmtUsd(r.bill.monthlyUsd, 2)}/mo</div>
+              <div class="muted-xs">${storedTb} TB + ${egressTb} TB/mo</div>
+            </td>
+            <td>
+              <div><strong>${fmtUsd(Math.round(r.bill.annualUsd))}/yr</strong></div>
+            </td>
+            <td>${savHtml}</td>
+            <td class="policy-text">
+              <div>${esc(r.policy_note)}</div>
+              ${dynWarnHtml}
+            </td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    function exportCsv() {
+      const { storedTb, egressTb } = getInputs();
+      const awsP = (DATA.providers || []).find(x => x.id === "aws_s3");
+      const awsAnnual = awsP ? calcBill(awsP, storedTb, egressTb).annualUsd : 0;
+      const header = [
+        "Provider", "Category", "Zero_Egress", "S3_Compatible", "EU_Sovereign",
+        "Storage_USD_per_GB", "Egress_USD_per_GB", "Stored_TB", "Egress_TB_Mo",
+        "Monthly_Total_USD", "Annual_Total_USD", "Annual_Savings_vs_AWS_USD", "Policy_Caveat"
+      ];
+      const lines = [header.join(",")].concat((DATA.providers || []).map(p => {
+        const b = calcBill(p, storedTb, egressTb);
+        return [
+          p.name, p.category, p.zero_egress, p.s3_compatible, p.eu_sovereign,
+          p.storage_per_gb, p.egress_per_gb, storedTb, egressTb,
+          b.monthlyUsd.toFixed(2), b.annualUsd.toFixed(2), (awsAnnual - b.annualUsd).toFixed(2), p.policy_note
+        ].map(v => `"${String(v ?? "").replace(/"/g, '""')}"`).join(",");
+      }));
+      const blob = new Blob([lines.join("\n")], { type: "text/csv;charset=utf-8;" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = `cloud_egress_fees_${storedTb}TB_stored_${egressTb}TB_egress.csv`;
+      a.click();
+    }
+
+    async function init() {
+      const basePath = window.location.pathname.replace(/\/$/, "");
+      const jsonUrl = basePath.includes("/starter/") ? `${basePath}/egress_fees.json` : "./egress_fees.json";
+      const resp = await fetch(jsonUrl);
+      DATA = await resp.json();
+      const awsVer = (DATA.aws_price_list_telemetry || {}).offer_version || "live";
+      const liveCnt = (DATA.summary || {}).providers_verified_live || (DATA.providers || []).length;
+      document.getElementById("updated-stamp").textContent =
+        `Updated: ${DATA.updated_at_utc || "-"} · AWS Offer v${awsVer} · ${liveCnt}/18 Live`;
+      recalculateAll();
+    }
+
+    applyTheme();
+    applySaleStage();
+    init();
+  </script>
+</body>
+</html>
