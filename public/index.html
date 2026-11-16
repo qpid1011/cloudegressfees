@@ -6,6 +6,19 @@
   <title>Cloud Egress Fees (2026 Live) — S3, Zero-Egress &amp; Bandwidth FinOps Calculator</title>
   <meta name="description" content="Compare live cloud egress fees and object storage pricing across 18 providers (AWS S3, GCP, Azure, Cloudflare R2, Wasabi, Backblaze B2, Tigris, Storj, Hetzner, Bunny.net). Calculate instant FinOps annual egress savings." />
   <link rel="canonical" href="https://cloudegressfees.com/" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HE84C7N8Y8"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-HE84C7N8Y8', { anonymize_ip: true });
+    document.addEventListener('click', function(e) {
+      var a = e.target && e.target.closest ? e.target.closest('a[href^="http"]') : null;
+      if (a && a.hostname && a.hostname.indexOf('cloudegressfees.com') === -1) {
+        gtag('event', 'provider_outbound_click', { provider_domain: a.hostname, link_url: a.href });
+      }
+    });
+  </script>
   <meta property="og:title" content="Cloud Egress Fees — Live 18-Cloud Bandwidth &amp; Zero-Egress Storage Calculator" />
   <meta property="og:description" content="Calculate your exact monthly &amp; annual cloud storage + outbound bandwidth bill across AWS S3, Cloudflare R2, Wasabi, Backblaze B2, Tigris, Storj, Hetzner &amp; 11 more clouds." />
   <meta property="og:url" content="https://cloudegressfees.com/" />
