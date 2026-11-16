@@ -28,14 +28,16 @@ jobs:
         with:
           python-version: "3.11"
       - name: Fetch live AWS Price List metadata & probe 18 cloud storage/CDN providers
-        run: python3 scripts/sync_egress_fees.py
-      - name: Commit updated egress_fees.json and daily history archive
+        run: |
+          python3 scripts/sync_egress_fees.py
+          python3 scripts/prerender_seo.py
+      - name: Commit updated egress_fees.json, SSR index.html, sitemap & daily history archive
         run: |
           git config user.name "CloudEgressFees Bot"
           git config user.email "bot@cloudegressfees.com"
-          git add public/egress_fees.json public/history/
+          git add public/egress_fees.json public/index.html public/sitemap.xml public/*.txt public/history/
           if ! git diff --staged --quiet; then
-            git commit -m "chore(egress): auto-sync cloud storage & egress pricing telemetry [skip ci]"
+            git commit -m "chore(egress): auto-sync cloud storage & egress pricing, SSR HTML & history [skip ci]"
             git pull --rebase -X ours origin main
             git push origin HEAD:main
           fi
@@ -48,3 +50,5 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Ping IndexNow after Pages deploy
+        run: python3 scripts/prerender_seo.py --ping-indexnow || true
