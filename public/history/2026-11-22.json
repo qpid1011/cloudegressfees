@@ -1,0 +1,126 @@
+{
+  "date_utc": "2026-11-22",
+  "updated_at_utc": "2026-11-22 07:22 UTC",
+  "aws_offer_version": "20261121172919",
+  "summary": {
+    "providers_tracked": 18,
+    "providers_verified_live": 18,
+    "zero_egress_providers": 6,
+    "default_workload": "20 TB stored + 50 TB/mo egress",
+    "aws_s3_20tb_50tb_monthly_usd": 4951.0,
+    "aws_s3_10tb_50tb_monthly_usd": 4721.0,
+    "lowest_20tb_50tb_provider": "Backblaze B2 Cloud Storage",
+    "lowest_20tb_50tb_monthly_usd": 120.0,
+    "max_annual_savings_20tb_50tb_usd": 57972.0
+  },
+  "rates_snapshot": [
+    {
+      "id": "backblaze_b2",
+      "storage_per_gb": 0.006,
+      "egress_per_gb": 0.01,
+      "monthly_20tb_50tb_usd": 120.0
+    },
+    {
+      "id": "wasabi",
+      "storage_per_gb": 0.00699,
+      "egress_per_gb": 0.0,
+      "monthly_20tb_50tb_usd": 139.8
+    },
+    {
+      "id": "impossible_cloud",
+      "storage_per_gb": 0.0079,
+      "egress_per_gb": 0.0,
+      "monthly_20tb_50tb_usd": 158.0
+    },
+    {
+      "id": "hetzner",
+      "storage_per_gb": 0.0053,
+      "egress_per_gb": 0.0011,
+      "monthly_20tb_50tb_usd": 159.9
+    },
+    {
+      "id": "cloudflare_r2",
+      "storage_per_gb": 0.015,
+      "egress_per_gb": 0.0,
+      "monthly_20tb_50tb_usd": 300.0
+    },
+    {
+      "id": "fastly",
+      "storage_per_gb": 0.015,
+      "egress_per_gb": 0.0,
+      "monthly_20tb_50tb_usd": 300.0
+    },
+    {
+      "id": "tigris",
+      "storage_per_gb": 0.02,
+      "egress_per_gb": 0.0,
+      "monthly_20tb_50tb_usd": 400.0
+    },
+    {
+      "id": "storj",
+      "storage_per_gb": 0.004,
+      "egress_per_gb": 0.007,
+      "monthly_20tb_50tb_usd": 430.0
+    },
+    {
+      "id": "akamai_linode",
+      "storage_per_gb": 0.02,
+      "egress_per_gb": 0.005,
+      "monthly_20tb_50tb_usd": 645.0
+    },
+    {
+      "id": "ovhcloud",
+      "storage_per_gb": 0.0073,
+      "egress_per_gb": 0.011,
+      "monthly_20tb_50tb_usd": 696.0
+    },
+    {
+      "id": "bunny_net",
+      "storage_per_gb": 0.01,
+      "egress_per_gb": 0.01,
+      "monthly_20tb_50tb_usd": 700.0
+    },
+    {
+      "id": "gcore",
+      "storage_per_gb": 0.0108,
+      "egress_per_gb": 0.01,
+      "monthly_20tb_50tb_usd": 716.0
+    },
+    {
+      "id": "scaleway",
+      "storage_per_gb": 0.011,
+      "egress_per_gb": 0.011,
+      "monthly_20tb_50tb_usd": 769.17
+    },
+    {
+      "id": "vultr",
+      "storage_per_gb": 0.018,
+      "egress_per_gb": 0.01,
+      "monthly_20tb_50tb_usd": 850.0
+    },
+    {
+      "id": "digitalocean",
+      "storage_per_gb": 0.02,
+      "egress_per_gb": 0.01,
+      "monthly_20tb_50tb_usd": 890.0
+    },
+    {
+      "id": "azure_blob",
+      "storage_per_gb": 0.018,
+      "egress_per_gb": 0.087,
+      "monthly_20tb_50tb_usd": 4701.3
+    },
+    {
+      "id": "aws_s3",
+      "storage_per_gb": 0.023,
+      "egress_per_gb": 0.09,
+      "monthly_20tb_50tb_usd": 4951.0
+    },
+    {
+      "id": "gcp_gcs",
+      "storage_per_gb": 0.02,
+      "egress_per_gb": 0.12,
+      "monthly_20tb_50tb_usd": 6400.0
+    }
+  ]
+}
