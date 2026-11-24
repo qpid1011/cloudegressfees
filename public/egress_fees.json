@@ -1,7 +1,7 @@
 {
   "site": "CloudEgressFees.com",
-  "updated_at_utc": "2026-11-24 10:21 UTC",
-  "updated_epoch": 1795515697,
+  "updated_at_utc": "2026-11-24 14:38 UTC",
+  "updated_epoch": 1795531090,
   "stale_warning": false,
   "aws_price_list_telemetry": {
     "source_url": "https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonS3/current/region_index.json",
@@ -40,7 +40,7 @@
       "egress_label": "$0.00/GB up to 3x stored ($0.01/GB over)",
       "policy_note": "Free egress up to 3x monthly stored data ($0.01/GB beyond); unlimited $0 egress via Cloudflare/Fastly/Bunny CDN.",
       "probe_http_status": 200,
-      "probe_latency_ms": 181,
+      "probe_latency_ms": 123,
       "verified_live": true,
       "workload_10tb_50tb": {
         "storage_monthly_usd": 60.0,
@@ -76,7 +76,7 @@
       "egress_label": "$0.00/GB Zero Egress*",
       "policy_note": "$0 egress & $0 API calls; 90-day minimum storage retention policy; fair-use targets monthly egress <= active stored volume.",
       "probe_http_status": 200,
-      "probe_latency_ms": 449,
+      "probe_latency_ms": 187,
       "verified_live": true,
       "workload_10tb_50tb": {
         "storage_monthly_usd": 69.9,
@@ -112,7 +112,7 @@
       "egress_label": "$0.00/GB Zero Egress (EU)",
       "policy_note": "GDPR/ISO-certified EU sovereign S3 storage; $0 egress & $0 API call fees; 30-90 day minimum retention by plan.",
       "probe_http_status": 200,
-      "probe_latency_ms": 122,
+      "probe_latency_ms": 103,
       "verified_live": true,
       "workload_10tb_50tb": {
         "storage_monthly_usd": 79.0,
@@ -148,7 +148,7 @@
       "egress_label": "1 TB incl., then ~$0.0011/GB",
       "policy_note": "EU S3-compatible storage (FSN1/HEL1/NBG1); 1 TB/mo free egress included, then ~EUR 1/TB (~$0.0011/GB).",
       "probe_http_status": 200,
-      "probe_latency_ms": 702,
+      "probe_latency_ms": 491,
       "verified_live": true,
       "workload_10tb_50tb": {
         "storage_monthly_usd": 53.0,
@@ -184,7 +184,7 @@
       "egress_label": "$0.00/GB Zero Egress",
       "policy_note": "Unconditional $0.00/GB internet egress (no egress-to-storage ratio cap); Class A $4.50/M & Class B $0.36/M ops.",
       "probe_http_status": 200,
-      "probe_latency_ms": 95,
+      "probe_latency_ms": 68,
       "verified_live": true,
       "workload_10tb_50tb": {
         "storage_monthly_usd": 150.0,
@@ -220,7 +220,7 @@
       "egress_label": "$0.00/GB to Fastly CDN",
       "policy_note": "S3-compatible origin storage with $0.00/GB origin egress & $0 API request charges when fronted by Fastly CDN.",
       "probe_http_status": 200,
-      "probe_latency_ms": 71,
+      "probe_latency_ms": 198,
       "verified_live": true,
       "workload_10tb_50tb": {
         "storage_monthly_usd": 150.0,
@@ -256,7 +256,7 @@
       "egress_label": "$0.00/GB Global Zero Egress",
       "policy_note": "Globally distributed S3-compatible edge object storage with automatic geo-caching and $0.00/GB egress worldwide.",
       "probe_http_status": 200,
-      "probe_latency_ms": 166,
+      "probe_latency_ms": 130,
       "verified_live": true,
       "workload_10tb_50tb": {
         "storage_monthly_usd": 200.0,
@@ -292,7 +292,7 @@
       "egress_label": "$0.007/GB (92% below AWS)",
       "policy_note": "Distributed S3-compatible object storage at $4/TB storage + flat $7/TB global egress; per-segment fee on tiny objects.",
       "probe_http_status": 200,
-      "probe_latency_ms": 309,
+      "probe_latency_ms": 206,
       "verified_live": true,
       "workload_10tb_50tb": {
         "storage_monthly_usd": 40.0,
@@ -328,7 +328,7 @@
       "egress_label": "1 TB incl., then $0.005/GB",
       "policy_note": "Starts at $5/mo (250 GB + 1 TB outbound); pooled global outbound allowance with $0.005/GB ($5/TB) Akamai overage.",
       "probe_http_status": 200,
-      "probe_latency_ms": 120,
+      "probe_latency_ms": 185,
       "verified_live": true,
       "workload_10tb_50tb": {
         "storage_monthly_usd": 200.0,
@@ -364,7 +364,7 @@
       "egress_label": "$0.011/GB public ($0 internal)",
       "policy_note": "Standard S3 object storage at $0.0073/GB; $0 internal vRack traffic and flat $0.011/GB public internet egress.",
       "probe_http_status": 200,
-      "probe_latency_ms": 491,
+      "probe_latency_ms": 156,
       "verified_live": true,
       "workload_10tb_50tb": {
         "storage_monthly_usd": 73.0,
@@ -400,7 +400,7 @@
       "egress_label": "$0.01/GB NA/EU CDN ($0.005 Volume)",
       "policy_note": "$0.01/GB single-zone storage (+$0.005/GB per replication zone); $0 origin egress into Bunny CDN ($0.01/GB NA/EU).",
       "probe_http_status": 200,
-      "probe_latency_ms": 49,
+      "probe_latency_ms": 147,
       "verified_live": true,
       "workload_10tb_50tb": {
         "storage_monthly_usd": 100.0,
@@ -436,7 +436,7 @@
       "egress_label": "~$0.01/GB ($0 to Gcore CDN)",
       "policy_note": "S3-compatible storage in EU/US/Asia; $0 origin egress when delivered through Gcore CDN (~$0.01/GB blended egress).",
       "probe_http_status": 200,
-      "probe_latency_ms": 226,
+      "probe_latency_ms": 992,
       "verified_live": true,
       "workload_10tb_50tb": {
         "storage_monthly_usd": 108.0,
@@ -472,7 +472,7 @@
       "egress_label": "75 GB free, then ~$0.011/GB",
       "policy_note": "EU sovereign Multi-AZ S3 (Paris/Amsterdam/Warsaw); first 75 GB/mo egress free, $0 transfer to Scaleway instances.",
       "probe_http_status": 200,
-      "probe_latency_ms": 654,
+      "probe_latency_ms": 252,
       "verified_live": true,
       "workload_10tb_50tb": {
         "storage_monthly_usd": 110.0,
@@ -508,7 +508,7 @@
       "egress_label": "1 TB incl., then $0.01/GB",
       "policy_note": "Base tier starts at $18/mo (1 TB storage + 1 TB egress included), $0.018/GB storage & $0.01/GB outbound overage.",
       "probe_http_status": 200,
-      "probe_latency_ms": 205,
+      "probe_latency_ms": 86,
       "verified_live": true,
       "workload_10tb_50tb": {
         "storage_monthly_usd": 180.0,
@@ -544,7 +544,7 @@
       "egress_label": "1 TB incl. ($5 base), then $0.01/GB",
       "policy_note": "$5/mo base includes 250 GB storage + 1 TB outbound transfer (Spaces CDN included); $0.02/GB storage & $0.01/GB overage.",
       "probe_http_status": 200,
-      "probe_latency_ms": 114,
+      "probe_latency_ms": 197,
       "verified_live": true,
       "workload_10tb_50tb": {
         "storage_monthly_usd": 200.0,
@@ -580,7 +580,7 @@
       "egress_label": "$0.087/GB (after 100 GB free)",
       "policy_note": "First 100 GB/mo internet egress free, then $0.087/GB; native Azure Blob REST API (S3 via gateway).",
       "probe_http_status": 200,
-      "probe_latency_ms": 221,
+      "probe_latency_ms": 1219,
       "verified_live": true,
       "workload_10tb_50tb": {
         "storage_monthly_usd": 180.0,
@@ -616,7 +616,7 @@
       "egress_label": "$0.09/GB (after 100 GB free)",
       "policy_note": "100 GB/mo free internet egress; $0.09/GB headline tier ($0.085/GB 10-50 TB tiered); PUT/GET ops extra.",
       "probe_http_status": 200,
-      "probe_latency_ms": 150,
+      "probe_latency_ms": 130,
       "verified_live": true,
       "workload_10tb_50tb": {
         "storage_monthly_usd": 230.0,
@@ -652,7 +652,7 @@
       "egress_label": "$0.12/GB internet egress",
       "policy_note": "Standard NA/EU internet egress $0.12/GB (higher in APAC); Class A/B ops & inter-region replication extra.",
       "probe_http_status": 200,
-      "probe_latency_ms": 246,
+      "probe_latency_ms": 218,
       "verified_live": true,
       "workload_10tb_50tb": {
         "storage_monthly_usd": 200.0,
