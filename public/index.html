@@ -33,7 +33,7 @@
       "name": "Cloud Egress Fees & Zero-Egress Object Storage Pricing Index (18 Providers)",
       "description": "Normalized per-GB storage rates, outbound internet egress fees, free-tier multipliers, and policy caveats across 18 cloud object storage, S3-compatible, and CDN providers.",
       "url": "https://cloudegressfees.com/",
-      "dateModified": "2026-11-24T14:38:11Z",
+      "dateModified": "2026-11-24T15:36:10Z",
       "distribution": {
         "@type": "DataDownload",
         "encodingFormat": "application/json",
@@ -357,6 +357,41 @@
     .price-strong { font-size: 1.02rem; font-weight: 900; color: var(--text); }
     .policy-text { font-size: 0.77rem; color: var(--text-muted); max-width: 360px; line-height: 1.42; }
 
+    .seo-hub-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 15px 18px;
+      margin-bottom: 18px;
+    }
+    .seo-hub-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .seo-hub-title { font-size: 0.92rem; font-weight: 900; color: var(--text); margin: 0; }
+    .telemetry-strip { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 12px; }
+    .hub-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+      gap: 10px;
+    }
+    .hub-card {
+      display: block;
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .hub-card:hover { border-color: var(--accent); }
+    .hub-card-title { font-size: 0.84rem; font-weight: 800; color: var(--accent); margin: 5px 0 3px; }
+    .hub-card-desc { font-size: 0.75rem; color: var(--text-muted); line-height: 1.4; }
+
     .faq-section {
       margin-top: 26px;
       background: var(--surface);
@@ -508,6 +543,14 @@
         </div>
       </div>
     </section>
+
+    <!-- SEO_HUB_START -->
+    <section class="seo-hub-panel" aria-label="Multi-Day Verified Telemetry & FinOps Egress Deep-Dive Benchmarks">
+      <div class="seo-hub-head"><h3 class="seo-hub-title">📊 Multi-Day Price Telemetry &amp; FinOps Egress Deep-Dive Calculators</h3><span class="muted-sm">AWS Price List Offer <code>v20261121172919</code> · 41 Regions Indexed</span></div>
+      <div class="telemetry-strip"><span class="live-pill">📅 9 Archived Daily Snapshots (2026-11-16 → 2026-11-24)</span><span class="badge badge-low">🟢 18/18 Endpoints HTTP 200 Verified</span><span class="badge badge-ok">🔄 5 AWS Offer Versions Tracked · 0 rate hikes ($0.00 Δ stable)</span></div>
+      <div class="hub-grid"><a class="hub-card" href="/zero-egress-cloud-storage/"><span class="badge-zero">ZERO EGRESS · $0/GB</span><div class="hub-card-title">Zero Egress Cloud Storage →</div><div class="hub-card-desc">Compare all 6 $0.00/GB outbound bandwidth S3 providers against AWS S3 with retention &amp; ratio rules.</div></a><a class="hub-card" href="/data-egress-costs/"><span class="badge badge-low">ALL 18 CLOUDS · $/GB</span><div class="hub-card-title">Data Egress Costs Index →</div><div class="hub-card-desc">Full 18-provider outbound $/GB rate table &amp; 50 TB/mo bandwidth bill across AWS, GCP, Azure &amp; S3 alternatives.</div></a><a class="hub-card" href="/cloudflare-r2-vs-aws-s3/"><span class="badge-zero">R2 VS S3 · HEAD-TO-HEAD</span><div class="hub-card-title">Cloudflare R2 vs AWS S3 →</div><div class="hub-card-desc">Side-by-side storage ($0.015 vs $0.023/GB), $0 egress vs $0.09/GB, and Class A/B ops calculator.</div></a><a class="hub-card" href="/wasabi-vs-backblaze-b2/"><span class="badge badge-low">90-DAY &amp; 3× MULTIPLIER</span><div class="hub-card-title">Wasabi vs Backblaze B2 →</div><div class="hub-card-desc">Model Wasabi&#x27;s 90-day retention &amp; 1:1 fair-use rule against Backblaze B2&#x27;s 3x free egress cap &amp; Storj.</div></a><a class="hub-card" href="/eu-sovereign-s3-storage/"><span class="badge badge-eu">EU SOVEREIGN · GDPR</span><div class="hub-card-title">EU Sovereign GDPR S3 →</div><div class="hub-card-desc">Compare GDPR/Schrems-II European S3 clouds (Impossible Cloud, Hetzner, OVHcloud, Scaleway) &amp; zero-egress peers.</div></a></div>
+    </section>
+    <!-- SEO_HUB_END -->
 
     <section class="filter-bar" aria-label="Comparison Filters">
       <div class="filter-group">

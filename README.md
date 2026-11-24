@@ -5,6 +5,7 @@ Open, neutral FinOps benchmark and interactive bandwidth calculator comparing pe
 - **Live Web Calculator**: [https://cloudegressfees.com](https://cloudegressfees.com)
 - **Live JSON Feed**: [`/egress_fees.json`](https://cloudegressfees.com/egress_fees.json) (updated every 6 hours via GitHub Actions)
 - **Daily Historical Snapshots**: `/history/YYYY-MM-DD.json`
+- **Focused FinOps Benchmarks (`v5.0`)**: [`/zero-egress-cloud-storage/`](https://cloudegressfees.com/zero-egress-cloud-storage/) · [`/data-egress-costs/`](https://cloudegressfees.com/data-egress-costs/) · [`/cloudflare-r2-vs-aws-s3/`](https://cloudegressfees.com/cloudflare-r2-vs-aws-s3/) · [`/wasabi-vs-backblaze-b2/`](https://cloudegressfees.com/wasabi-vs-backblaze-b2/) · [`/eu-sovereign-s3-storage/`](https://cloudegressfees.com/eu-sovereign-s3-storage/)
 
 ## Tracked Cloud Storage & CDN Providers (18)
 - **Zero-Egress S3 & Edge Storage**: Cloudflare R2, Wasabi Hot Cloud Storage, Backblaze B2, Tigris Data, Impossible Cloud, Fastly Object Storage.
