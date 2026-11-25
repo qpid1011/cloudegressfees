@@ -24,7 +24,7 @@
   "pages": [
     {
       "slug": "zero-egress-cloud-storage",
-      "hub_badge": "ZERO EGRESS · $0/GB",
+      "hub_badge": "ZERO EGRESS \u00b7 $0/GB",
       "hub_label": "Zero Egress Cloud Storage",
       "hub_summary": "Compare all 6 $0.00/GB outbound bandwidth S3 providers against AWS S3 with retention & ratio rules.",
       "target_keyword": "Zero Egress Cloud Storage & $0/GB Bandwidth Providers",
@@ -36,7 +36,11 @@
       "sort_mode": "monthly_asc",
       "default_stored_tb": 20,
       "default_egress_tb": 50,
-      "focus_kpis": ["backblaze_b2", "wasabi", "cloudflare_r2"],
+      "focus_kpis": [
+        "backblaze_b2",
+        "wasabi",
+        "cloudflare_r2"
+      ],
       "caveats": [
         "Unconditional $0/GB Egress (Cloudflare R2, Tigris): No egress-to-storage ratio cap and no minimum retention window; audit Class A ($4.50/M) and Class B ($0.36/M) API request volume on small-file workloads.",
         "3x Stored Free Bandwidth Cap (Backblaze B2): Direct public egress is $0.00/GB up to 3x average monthly stored volume ($0.01/GB overage), or unlimited $0.00/GB via Cloudflare, Fastly, or Bunny CDN.",
@@ -59,7 +63,7 @@
     },
     {
       "slug": "data-egress-costs",
-      "hub_badge": "ALL 18 CLOUDS · $/GB",
+      "hub_badge": "ALL 18 CLOUDS \u00b7 $/GB",
       "hub_label": "Data Egress Costs Index",
       "hub_summary": "Full 18-provider outbound $/GB rate table & 50 TB/mo bandwidth bill across AWS, GCP, Azure & S3 alternatives.",
       "target_keyword": "Data Egress Costs Across AWS, GCP, Azure, R2 & S3 Alternatives",
@@ -71,10 +75,14 @@
       "sort_mode": "egress_asc",
       "default_stored_tb": 20,
       "default_egress_tb": 50,
-      "focus_kpis": ["cloudflare_r2", "hetzner", "gcp_gcs"],
+      "focus_kpis": [
+        "cloudflare_r2",
+        "hetzner",
+        "gcp_gcs"
+      ],
       "caveats": [
-        "Hyperscaler Bandwidth Multiplier (AWS, GCP, Azure): At 20 TB stored + 50 TB/mo outbound, bandwidth accounts for 91%–94% of total TCO ({aws_eg_mo}/mo on AWS S3, $6,000/mo on GCP Standard, $4,341/mo on Azure Blob Hot).",
-        "Sub-Penny Low-Egress Tier ($0.0011–$0.007/GB): Hetzner Object Storage includes 1 TB free then ~$0.0011/GB ($53.90/mo for 50 TB), Akamai/Linode bills $0.005/GB after 1 TB, and Storj charges flat $0.007/GB globally.",
+        "Hyperscaler Bandwidth Multiplier (AWS, GCP, Azure): At 20 TB stored + 50 TB/mo outbound, bandwidth accounts for 91%\u201394% of total TCO ({aws_eg_mo}/mo on AWS S3, $6,000/mo on GCP Standard, $4,341/mo on Azure Blob Hot).",
+        "Sub-Penny Low-Egress Tier ($0.0011\u2013$0.007/GB): Hetzner Object Storage includes 1 TB free then ~$0.0011/GB ($53.90/mo for 50 TB), Akamai/Linode bills $0.005/GB after 1 TB, and Storj charges flat $0.007/GB globally.",
         "Pooled vs Origin-to-CDN Egress: DigitalOcean Spaces, Vultr, and Linode include 1 TB/mo outbound transfer in base tiers, while Bunny.net and Gcore waive origin egress when delivered through their edge CDNs."
       ],
       "faqs": [
@@ -94,29 +102,38 @@
     },
     {
       "slug": "cloudflare-r2-vs-aws-s3",
-      "hub_badge": "R2 VS S3 · HEAD-TO-HEAD",
+      "hub_badge": "R2 VS S3 \u00b7 HEAD-TO-HEAD",
       "hub_label": "Cloudflare R2 vs AWS S3",
       "hub_summary": "Side-by-side storage ($0.015 vs $0.023/GB), $0 egress vs $0.09/GB, and Class A/B ops calculator.",
       "target_keyword": "Cloudflare R2 vs AWS S3 Egress & Storage Cost Calculator",
       "title": "Cloudflare R2 vs AWS S3 Egress & Storage Cost Calculator (2026)",
       "h1": "Cloudflare R2 vs AWS S3 Egress & Storage Cost Calculator",
       "meta_description": "Head-to-head Cloudflare R2 vs AWS S3 cost calculator (plus Backblaze B2 & Tigris): compare $0.015/GB + $0 egress against S3 $0.023/GB + $0.09/GB bandwidth.",
-      "hero_subtitle": "Direct FinOps TCO comparison between Cloudflare R2, AWS S3 Standard, Backblaze B2, and Tigris Data—modeling storage deltas, outbound bandwidth elimination, and S3 API migration trade-offs.",
+      "hero_subtitle": "Direct FinOps TCO comparison between Cloudflare R2, AWS S3 Standard, Backblaze B2, and Tigris Data\u2014modeling storage deltas, outbound bandwidth elimination, and S3 API migration trade-offs.",
       "filter_mode": "explicit_ids",
-      "provider_ids": ["cloudflare_r2", "backblaze_b2", "tigris", "aws_s3"],
+      "provider_ids": [
+        "cloudflare_r2",
+        "backblaze_b2",
+        "tigris",
+        "aws_s3"
+      ],
       "sort_mode": "monthly_asc",
       "default_stored_tb": 20,
       "default_egress_tb": 50,
-      "focus_kpis": ["cloudflare_r2", "backblaze_b2", "tigris"],
+      "focus_kpis": [
+        "cloudflare_r2",
+        "backblaze_b2",
+        "tigris"
+      ],
       "caveats": [
-        "Storage + Bandwidth Delta (R2 vs S3): Cloudflare R2 charges $0.015/GB-mo storage (35% below AWS S3's $0.023/GB) and $0.00/GB internet egress vs AWS S3's $0.09/GB—saving {r2_save_yr}/yr at 20 TB stored + 50 TB/mo egress.",
+        "Storage + Bandwidth Delta (R2 vs S3): Cloudflare R2 charges $0.015/GB-mo storage (35% below AWS S3's $0.023/GB) and $0.00/GB internet egress vs AWS S3's $0.09/GB\u2014saving {r2_save_yr}/yr at 20 TB stored + 50 TB/mo egress.",
         "S3 Class A / Class B Request Math: Cloudflare R2 charges $4.50 per million Class A (PUT/POST/LIST) and $0.36 per million Class B (GET/HEAD) after free tiers, closely matching AWS S3 Standard ($5.00/M PUT, $0.40/M GET).",
         "Multi-Region Edge Alternatives (Tigris & B2): Tigris ($0.020/GB, $0 egress) adds automatic global geo-caching without manual bucket region pinning, while Backblaze B2 ($0.006/GB) cuts cold/warm storage cost 60% below R2."
       ],
       "faqs": [
         {
           "q": "How much cheaper is Cloudflare R2 than AWS S3 for 20 TB stored and 50 TB/mo egress?",
-          "a": "Cloudflare R2 costs {r2_mo}/mo ({r2_yr}/yr) vs {aws_mo}/mo ({aws_yr}/yr) on AWS S3 Standard—an annual FinOps reduction of {r2_save_yr}/yr (94% lower TCO), driven by eliminating {aws_eg_mo}/mo in AWS outbound bandwidth charges."
+          "a": "Cloudflare R2 costs {r2_mo}/mo ({r2_yr}/yr) vs {aws_mo}/mo ({aws_yr}/yr) on AWS S3 Standard\u2014an annual FinOps reduction of {r2_save_yr}/yr (94% lower TCO), driven by eliminating {aws_eg_mo}/mo in AWS outbound bandwidth charges."
         },
         {
           "q": "Does Cloudflare R2 enforce an egress-to-storage ratio limit or minimum retention period?",
@@ -130,7 +147,7 @@
     },
     {
       "slug": "wasabi-vs-backblaze-b2",
-      "hub_badge": "90-DAY & 3× MULTIPLIER",
+      "hub_badge": "90-DAY & 3\u00d7 MULTIPLIER",
       "hub_label": "Wasabi vs Backblaze B2",
       "hub_summary": "Model Wasabi's 90-day retention & 1:1 fair-use rule against Backblaze B2's 3x free egress cap & Storj.",
       "target_keyword": "Wasabi vs Backblaze B2 Egress, 90-Day Retention & 3x Multiplier Calculator",
@@ -139,11 +156,22 @@
       "meta_description": "Calculate exact TCO for Wasabi ($0.00699/GB, 90-day retention, 1:1 fair-use) vs Backblaze B2 ($0.006/GB, 3x free egress, $0.01/GB over), Impossible Cloud, Storj & R2.",
       "hero_subtitle": "Stress-test egress-to-storage ratios across Wasabi Hot Storage, Backblaze B2, Impossible Cloud, Storj, and Cloudflare R2 to uncover 3x cap overages and 90-day deleted-storage penalties before migrating.",
       "filter_mode": "explicit_ids",
-      "provider_ids": ["wasabi", "backblaze_b2", "impossible_cloud", "storj", "cloudflare_r2", "aws_s3"],
+      "provider_ids": [
+        "wasabi",
+        "backblaze_b2",
+        "impossible_cloud",
+        "storj",
+        "cloudflare_r2",
+        "aws_s3"
+      ],
       "sort_mode": "monthly_asc",
       "default_stored_tb": 20,
       "default_egress_tb": 50,
-      "focus_kpis": ["wasabi", "backblaze_b2", "storj"],
+      "focus_kpis": [
+        "wasabi",
+        "backblaze_b2",
+        "storj"
+      ],
       "caveats": [
         "Backblaze B2 3x Crossover Point: At 20 TB stored + 50 TB/mo egress (2.5x ratio), B2 bills $0 bandwidth ($120/mo total). At 10 TB stored + 50 TB/mo egress (5x ratio), 20 TB exceeds the 30 TB free cap, adding $200/mo ($260/mo total) unless fronted by a Bandwidth Alliance CDN.",
         "Wasabi 90-Day Retention & 1:1 Fair-Use Policy: Wasabi charges $0.00699/GB ($0 egress & $0 API calls), but objects deleted before 90 days incur timed-deleted storage charges, and sustained monthly egress exceeding active stored volume (>1:1 ratio) triggers fair-use review.",
@@ -166,7 +194,7 @@
     },
     {
       "slug": "eu-sovereign-s3-storage",
-      "hub_badge": "EU SOVEREIGN · GDPR",
+      "hub_badge": "EU SOVEREIGN \u00b7 GDPR",
       "hub_label": "EU Sovereign GDPR S3",
       "hub_summary": "Compare GDPR/Schrems-II European S3 clouds (Impossible Cloud, Hetzner, OVHcloud, Scaleway) & zero-egress peers.",
       "target_keyword": "EU Sovereign GDPR S3 Cloud Storage & Egress Pricing",
@@ -178,10 +206,14 @@
       "sort_mode": "eu_first_monthly_asc",
       "default_stored_tb": 20,
       "default_egress_tb": 50,
-      "focus_kpis": ["impossible_cloud", "hetzner", "ovhcloud"],
+      "focus_kpis": [
+        "impossible_cloud",
+        "hetzner",
+        "ovhcloud"
+      ],
       "caveats": [
         "EU Jurisdiction & CLOUD Act Isolation: Impossible Cloud (Germany), Hetzner (Germany/Finland), OVHcloud (France), Scaleway (France), Bunny.net (Slovenia), and Gcore (Luxembourg) operate EU-incorporated infrastructure for strict GDPR / NIS2 data sovereignty.",
-        "Zero vs Ultra-Low EU Egress: Impossible Cloud charges $0.00/GB egress ($0.0079/GB storage, {imp_yr}/yr at 20 TB + 50 TB/mo), while Hetzner Object Storage charges $0.0053/GB storage + ~$0.0011/GB over 1 TB ({hetzner_yr}/yr)—both 97% below AWS S3 ({aws_yr}/yr).",
+        "Zero vs Ultra-Low EU Egress: Impossible Cloud charges $0.00/GB egress ($0.0079/GB storage, {imp_yr}/yr at 20 TB + 50 TB/mo), while Hetzner Object Storage charges $0.0053/GB storage + ~$0.0011/GB over 1 TB ({hetzner_yr}/yr)\u2014both 97% below AWS S3 ({aws_yr}/yr).",
         "Multi-AZ & Internal vRack Transfer: Scaleway Multi-AZ (Paris/Amsterdam/Warsaw, {scaleway_yr}/yr) and OVHcloud ({ovh_yr}/yr) provide $0.00/GB private network/vRack transfer to European GPU and Kubernetes nodes."
       ],
       "faqs": [
@@ -191,13 +223,265 @@
         },
         {
           "q": "How do OVHcloud, Scaleway, Bunny.net, and Gcore compare on European bandwidth pricing?",
-          "a": "At 20 TB stored + 50 TB/mo public egress, Bunny.net costs $8,400/yr ($0.01/GB NA/EU CDN), OVHcloud costs {ovh_yr}/yr ($0.011/GB public, $0 vRack), Gcore costs $8,592/yr (~$0.01/GB), and Scaleway Multi-AZ costs {scaleway_yr}/yr—each saving over $50,000/yr vs AWS S3 ({aws_yr}/yr)."
+          "a": "At 20 TB stored + 50 TB/mo public egress, Bunny.net costs $8,400/yr ($0.01/GB NA/EU CDN), OVHcloud costs {ovh_yr}/yr ($0.011/GB public, $0 vRack), Gcore costs $8,592/yr (~$0.01/GB), and Scaleway Multi-AZ costs {scaleway_yr}/yr\u2014each saving over $50,000/yr vs AWS S3 ({aws_yr}/yr)."
         },
         {
           "q": "Can US zero-egress providers pin buckets to EU regions, and how does that differ from EU sovereignty?",
           "a": "Cloudflare R2, Wasabi, and Backblaze B2 support EU bucket jurisdiction/region pinning for latency and data locality, whereas EU-headquartered providers (Hetzner, OVHcloud, Scaleway, Impossible Cloud) additionally avoid US CLOUD Act parent-entity jurisdiction."
         }
       ]
+    },
+    {
+      "slug": "aws-vs-gcp-vs-azure-egress",
+      "hub_badge": "BIG-3 HYPERSCALERS",
+      "hub_label": "AWS vs GCP vs Azure Egress",
+      "hub_summary": "Compare AWS S3 ($0.09/GB), GCP ($0.12/GB), and Azure ($0.087/GB) bandwidth bills against R2 & B2.",
+      "target_keyword": "AWS vs GCP vs Azure Cloud Egress Fees Calculator",
+      "title": "AWS vs GCP vs Azure Cloud Egress Fees Calculator (2026 Live)",
+      "h1": "AWS vs GCP vs Azure Outbound Cloud Egress Fees Calculator",
+      "meta_description": "Compare AWS S3 ($0.09/GB), Google Cloud Storage ($0.12/GB), and Azure Blob ($0.087/GB) outbound internet egress bills against zero-egress S3 alternatives.",
+      "hero_subtitle": "Side-by-side FinOps comparison of AWS, Google Cloud, and Microsoft Azure public internet egress rates versus Cloudflare R2 and Backblaze B2.",
+      "filter_mode": "explicit_ids",
+      "provider_ids": [
+        "aws_s3",
+        "gcp_gcs",
+        "azure_blob",
+        "cloudflare_r2",
+        "backblaze_b2"
+      ],
+      "sort_mode": "monthly_asc",
+      "default_stored_tb": 20,
+      "default_egress_tb": 50,
+      "focus_kpis": [
+        "cloudflare_r2",
+        "azure_blob",
+        "gcp_gcs"
+      ],
+      "caveats": [
+        "Hyperscaler Public Internet Tiers: GCP Standard bills $0.12/GB ($77,040/yr at 20 TB + 50 TB/mo), AWS S3 bills $0.09/GB ($59,412/yr), and Azure Blob Hot bills $0.087/GB ($57,109/yr).",
+        "Free-Tier Allowances: AWS S3 and Azure include 100 GB/mo free internet egress, which offsets less than 0.2% of a 50 TB/mo production workload.",
+        "Multi-Cloud Origin Offload: Syncing public read buckets to Cloudflare R2 ($3,600/yr) or Backblaze B2 ($1,440/yr) eliminates 94%\u201398% of hyperscaler bandwidth spend."
+      ],
+      "faqs": [
+        {
+          "q": "Which of AWS, GCP, or Azure has the highest cloud egress fees?",
+          "a": "On standard public internet routing, Google Cloud Storage is highest at $0.12/GB ({gcp_yr}/yr for 20 TB stored + 50 TB/mo egress), followed by AWS S3 at $0.09/GB ({aws_yr}/yr) and Azure Blob Hot at $0.087/GB ({azure_yr}/yr)."
+        },
+        {
+          "q": "How much can enterprises save moving public egress off AWS, GCP, or Azure?",
+          "a": "Offloading 20 TB stored + 50 TB/mo public downloads to {page_best_name} ({page_best_yr}/yr) saves {page_max_save_yr}/yr versus AWS S3 and over $73,000/yr versus GCP Standard."
+        }
+      ]
+    },
+    {
+      "slug": "cdn-bandwidth-pricing",
+      "hub_badge": "CDN & EDGE STORAGE",
+      "hub_label": "CDN Bandwidth Pricing",
+      "hub_summary": "Compare Bunny.net ($0.01/GB), Fastly ($0 egress), Gcore, and Cloudflare R2 edge delivery bills.",
+      "target_keyword": "CDN Bandwidth & Edge Object Storage Egress Pricing",
+      "title": "CDN Bandwidth & Edge Object Storage Egress Pricing (2026 Live)",
+      "h1": "CDN Bandwidth & Edge Object Storage Egress Pricing",
+      "meta_description": "Compare live CDN bandwidth and edge object storage pricing across Cloudflare R2, Fastly, Bunny.net ($0.01/GB), Gcore, DigitalOcean Spaces, and AWS S3.",
+      "hero_subtitle": "Model high-throughput media, AI weight distribution, and software download TCO across zero-egress edge storage and $0.01/GB global CDNs.",
+      "filter_mode": "explicit_ids",
+      "provider_ids": [
+        "cloudflare_r2",
+        "fastly",
+        "tigris",
+        "bunny_net",
+        "gcore",
+        "aws_s3"
+      ],
+      "sort_mode": "monthly_asc",
+      "default_stored_tb": 20,
+      "default_egress_tb": 50,
+      "focus_kpis": [
+        "cloudflare_r2",
+        "fastly",
+        "bunny_net"
+      ],
+      "caveats": [
+        "Zero-Egress Edge Storage (Cloudflare R2, Fastly, Tigris): $0.00/GB outbound transfer with global edge caching for static assets and model shards.",
+        "Pay-Per-GB Volume CDNs (Bunny.net & Gcore): Flat ~$0.01/GB NA/EU delivery (~89% below AWS S3 direct origin egress) with predictable regional volume tiers."
+      ],
+      "faqs": [
+        {
+          "q": "How do Bunny.net, Fastly, and Cloudflare R2 compare on 50 TB/mo bandwidth?",
+          "a": "At 20 TB stored + 50 TB/mo transfer, Cloudflare R2 and Fastly Object Storage cost $3,600/yr ($0 egress), while Bunny.net costs $8,400/yr ($0.01/GB NA/EU CDN)\u2014all drastically below {aws_yr}/yr on AWS S3."
+        }
+      ]
+    }
+  ],
+  "auto_promotions": [
+    {
+      "slug": "aws-vs-gcp-vs-azure-egress",
+      "iso_week": "2026-W48",
+      "promoted_at_utc": "2026-11-25 02:47 UTC",
+      "trigger_query": "aws s3 egress cost",
+      "trigger_score": 1250,
+      "trigger_source": "google_us_autocomplete",
+      "live_providers_verified": 5
+    },
+    {
+      "slug": "cdn-bandwidth-pricing",
+      "iso_week": "2026-W48",
+      "promoted_at_utc": "2026-11-25 02:47 UTC",
+      "trigger_query": "cloudflare cdn bandwidth pricing",
+      "trigger_score": 601,
+      "trigger_source": "google_us_autocomplete",
+      "live_providers_verified": 6
+    }
+  ],
+  "observed_gsc_queries": [
+    {
+      "query": "cloudflare r2 vs aws s3",
+      "score": 1252,
+      "source": "google_us_autocomplete",
+      "seed": "cloudflare r2 vs"
+    },
+    {
+      "query": "zero egress meaning",
+      "score": 1251,
+      "source": "google_us_autocomplete",
+      "seed": "zero egress"
+    },
+    {
+      "query": "cloudflare r2 vs backblaze b2",
+      "score": 1251,
+      "source": "google_us_autocomplete",
+      "seed": "cloudflare r2 vs"
+    },
+    {
+      "query": "cloud egress fees",
+      "score": 1250,
+      "source": "google_us_autocomplete",
+      "seed": "cloud egress"
+    },
+    {
+      "query": "aws s3 egress cost",
+      "score": 1250,
+      "source": "google_us_autocomplete",
+      "seed": "aws s3 egress"
+    },
+    {
+      "query": "gcp egress costs",
+      "score": 1250,
+      "source": "google_us_autocomplete",
+      "seed": "gcp egress"
+    },
+    {
+      "query": "azure egress cost",
+      "score": 1250,
+      "source": "google_us_autocomplete",
+      "seed": "azure egress"
+    },
+    {
+      "query": "zero egress fees",
+      "score": 1250,
+      "source": "google_us_autocomplete",
+      "seed": "zero egress"
+    },
+    {
+      "query": "cloudflare r2 vs s3",
+      "score": 1250,
+      "source": "google_us_autocomplete",
+      "seed": "cloudflare r2 vs"
+    },
+    {
+      "query": "wasabi vs horseradish",
+      "score": 1250,
+      "source": "google_us_autocomplete",
+      "seed": "wasabi vs"
+    },
+    {
+      "query": "backblaze b2 vs cloudflare r2",
+      "score": 1250,
+      "source": "google_us_autocomplete",
+      "seed": "backblaze b2 vs"
+    },
+    {
+      "query": "hetzner storage box",
+      "score": 1250,
+      "source": "google_us_autocomplete",
+      "seed": "hetzner storage"
+    },
+    {
+      "query": "azure egress cost calculator",
+      "score": 950,
+      "source": "google_us_autocomplete",
+      "seed": "azure egress"
+    },
+    {
+      "query": "backblaze b2 vs s3",
+      "score": 950,
+      "source": "google_us_autocomplete",
+      "seed": "backblaze b2 vs"
+    },
+    {
+      "query": "backblaze b2 vs wasabi",
+      "score": 900,
+      "source": "google_us_autocomplete",
+      "seed": "backblaze b2 vs"
+    },
+    {
+      "query": "azure egress pricing",
+      "score": 750,
+      "source": "google_us_autocomplete",
+      "seed": "azure egress"
+    },
+    {
+      "query": "backblaze b2 vs google drive",
+      "score": 750,
+      "source": "google_us_autocomplete",
+      "seed": "backblaze b2 vs"
+    },
+    {
+      "query": "azure egress charges",
+      "score": 650,
+      "source": "google_us_autocomplete",
+      "seed": "azure egress"
+    },
+    {
+      "query": "backblaze b2 vs aws s3",
+      "score": 650,
+      "source": "google_us_autocomplete",
+      "seed": "backblaze b2 vs"
+    },
+    {
+      "query": "cloud egress meaning",
+      "score": 601,
+      "source": "google_us_autocomplete",
+      "seed": "cloud egress"
+    },
+    {
+      "query": "aws s3 egress",
+      "score": 601,
+      "source": "google_us_autocomplete",
+      "seed": "aws s3 egress"
+    },
+    {
+      "query": "gcp egress cost calculator",
+      "score": 601,
+      "source": "google_us_autocomplete",
+      "seed": "gcp egress"
+    },
+    {
+      "query": "azure egress cost per gb",
+      "score": 601,
+      "source": "google_us_autocomplete",
+      "seed": "azure egress"
+    },
+    {
+      "query": "zero egress",
+      "score": 601,
+      "source": "google_us_autocomplete",
+      "seed": "zero egress"
+    },
+    {
+      "query": "cloudflare r2 vs d1",
+      "score": 601,
+      "source": "google_us_autocomplete",
+      "seed": "cloudflare r2 vs"
     }
   ]
 }

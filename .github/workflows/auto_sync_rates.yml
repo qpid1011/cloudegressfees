@@ -27,6 +27,7 @@ jobs:
       - name: Fetch live AWS Price List metadata & probe 18 cloud storage/CDN providers
         run: |
           python3 scripts/sync_egress_fees.py
+          python3 scripts/discover_seo_queries.py
           python3 scripts/prerender_seo.py
           python3 scripts/build_seo_pages.py
       - name: Commit updated egress_fees.json, SSR index.html, programmatic subpages, sitemap & daily history archive
