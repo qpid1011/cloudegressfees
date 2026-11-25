@@ -1,29 +1,10 @@
 {
   "site": "CloudEgressFees.com",
-  "updated_at_utc": "2026-11-25 02:47 UTC",
+  "updated_at_utc": "2026-11-25 02:48 UTC",
   "iso_week": "2026-W48",
   "total_signals_collected": 86,
   "active_subpages_count": 7,
-  "newly_promoted_this_run": [
-    {
-      "slug": "aws-vs-gcp-vs-azure-egress",
-      "iso_week": "2026-W48",
-      "promoted_at_utc": "2026-11-25 02:47 UTC",
-      "trigger_query": "aws s3 egress cost",
-      "trigger_score": 1250,
-      "trigger_source": "google_us_autocomplete",
-      "live_providers_verified": 5
-    },
-    {
-      "slug": "cdn-bandwidth-pricing",
-      "iso_week": "2026-W48",
-      "promoted_at_utc": "2026-11-25 02:47 UTC",
-      "trigger_query": "cloudflare cdn bandwidth pricing",
-      "trigger_score": 601,
-      "trigger_source": "google_us_autocomplete",
-      "live_providers_verified": 6
-    }
-  ],
+  "newly_promoted_this_run": [],
   "top_live_queries": [
     {
       "query": "cloudflare r2 vs aws s3",
