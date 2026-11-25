@@ -1,6 +1,6 @@
 {
   "site": "CloudEgressFees.com",
-  "updated_at_utc": "2026-11-25 09:02 UTC",
+  "updated_at_utc": "2026-11-25 21:57 UTC",
   "iso_week": "2026-W48",
   "total_signals_collected": 86,
   "active_subpages_count": 7,
@@ -80,33 +80,27 @@
     },
     {
       "query": "azure egress cost calculator",
-      "score": 950,
+      "score": 1050,
       "source": "google_us_autocomplete",
       "seed": "azure egress"
     },
     {
       "query": "backblaze b2 vs s3",
-      "score": 950,
+      "score": 951,
       "source": "google_us_autocomplete",
       "seed": "backblaze b2 vs"
     },
     {
       "query": "backblaze b2 vs wasabi",
-      "score": 900,
+      "score": 950,
       "source": "google_us_autocomplete",
       "seed": "backblaze b2 vs"
     },
     {
       "query": "azure egress pricing",
-      "score": 750,
+      "score": 700,
       "source": "google_us_autocomplete",
       "seed": "azure egress"
-    },
-    {
-      "query": "backblaze b2 vs google drive",
-      "score": 750,
-      "source": "google_us_autocomplete",
-      "seed": "backblaze b2 vs"
     },
     {
       "query": "azure egress charges",
@@ -121,13 +115,19 @@
       "seed": "backblaze b2 vs"
     },
     {
+      "query": "backblaze b2 vs google drive",
+      "score": 602,
+      "source": "google_us_autocomplete",
+      "seed": "backblaze b2 vs"
+    },
+    {
       "query": "cloud egress meaning",
       "score": 601,
       "source": "google_us_autocomplete",
       "seed": "cloud egress"
     },
     {
-      "query": "aws s3 egress",
+      "query": "aws s3 egress cost calculator",
       "score": 601,
       "source": "google_us_autocomplete",
       "seed": "aws s3 egress"
@@ -151,7 +151,7 @@
       "seed": "zero egress"
     },
     {
-      "query": "cloudflare r2 vs d1",
+      "query": "cloudflare r2 vs aws s3 pricing",
       "score": 601,
       "source": "google_us_autocomplete",
       "seed": "cloudflare r2 vs"
