@@ -334,22 +334,16 @@
   ],
   "observed_gsc_queries": [
     {
-      "query": "cloudflare r2 vs s3",
+      "query": "cloudflare r2 vs aws s3",
       "score": 1252,
       "source": "google_us_autocomplete",
       "seed": "cloudflare r2 vs"
     },
     {
-      "query": "cloudflare r2 vs aws s3",
+      "query": "cloudflare r2 vs s3",
       "score": 1251,
       "source": "google_us_autocomplete",
       "seed": "cloudflare r2 vs"
-    },
-    {
-      "query": "hetzner storage box",
-      "score": 1251,
-      "source": "google_us_autocomplete",
-      "seed": "hetzner storage"
     },
     {
       "query": "cloud egress fees",
@@ -400,7 +394,7 @@
       "seed": "backblaze b2 vs"
     },
     {
-      "query": "hetzner storage share",
+      "query": "hetzner storage box",
       "score": 1250,
       "source": "google_us_autocomplete",
       "seed": "hetzner storage"
@@ -482,6 +476,12 @@
       "score": 601,
       "source": "google_us_autocomplete",
       "seed": "wasabi vs"
+    },
+    {
+      "query": "backblaze b2 vs computer backup",
+      "score": 601,
+      "source": "google_us_autocomplete",
+      "seed": "backblaze b2 vs"
     }
   ]
 }
