@@ -1,6 +1,6 @@
 {
   "site": "CloudEgressFees.com",
-  "updated_at_utc": "2026-11-26 21:52 UTC",
+  "updated_at_utc": "2026-11-27 08:59 UTC",
   "iso_week": "2026-W48",
   "total_signals_collected": 86,
   "active_subpages_count": 7,
@@ -8,12 +8,6 @@
   "top_live_queries": [
     {
       "query": "cloudflare r2 vs aws s3",
-      "score": 1252,
-      "source": "google_us_autocomplete",
-      "seed": "cloudflare r2 vs"
-    },
-    {
-      "query": "cloudflare r2 vs s3",
       "score": 1251,
       "source": "google_us_autocomplete",
       "seed": "cloudflare r2 vs"
@@ -37,7 +31,7 @@
       "seed": "gcp egress"
     },
     {
-      "query": "azure egress cost",
+      "query": "azure egress costs",
       "score": 1250,
       "source": "google_us_autocomplete",
       "seed": "azure egress"
@@ -74,7 +68,13 @@
     },
     {
       "query": "backblaze b2 vs s3",
-      "score": 1001,
+      "score": 1051,
+      "source": "google_us_autocomplete",
+      "seed": "backblaze b2 vs"
+    },
+    {
+      "query": "backblaze b2 vs wasabi",
+      "score": 1050,
       "source": "google_us_autocomplete",
       "seed": "backblaze b2 vs"
     },
@@ -85,10 +85,10 @@
       "seed": "azure egress"
     },
     {
-      "query": "backblaze b2 vs wasabi",
+      "query": "cloudflare r2 vs s3",
       "score": 1000,
       "source": "google_us_autocomplete",
-      "seed": "backblaze b2 vs"
+      "seed": "cloudflare r2 vs"
     },
     {
       "query": "azure egress charges",
@@ -104,7 +104,7 @@
     },
     {
       "query": "backblaze b2 vs google drive",
-      "score": 650,
+      "score": 700,
       "source": "google_us_autocomplete",
       "seed": "backblaze b2 vs"
     },
