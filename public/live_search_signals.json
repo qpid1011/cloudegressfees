@@ -1,28 +1,16 @@
 {
   "site": "CloudEgressFees.com",
-  "updated_at_utc": "2026-11-27 21:35 UTC",
+  "updated_at_utc": "2026-11-28 08:22 UTC",
   "iso_week": "2026-W48",
   "total_signals_collected": 86,
   "active_subpages_count": 7,
   "newly_promoted_this_run": [],
   "top_live_queries": [
     {
-      "query": "cloudflare r2 vs s3",
-      "score": 1252,
-      "source": "google_us_autocomplete",
-      "seed": "cloudflare r2 vs"
-    },
-    {
       "query": "cloudflare r2 vs aws s3",
       "score": 1251,
       "source": "google_us_autocomplete",
       "seed": "cloudflare r2 vs"
-    },
-    {
-      "query": "hetzner storage box",
-      "score": 1251,
-      "source": "google_us_autocomplete",
-      "seed": "hetzner storage"
     },
     {
       "query": "cloud egress fees",
@@ -73,7 +61,7 @@
       "seed": "backblaze b2 vs"
     },
     {
-      "query": "hetzner storage share",
+      "query": "hetzner storage box",
       "score": 1250,
       "source": "google_us_autocomplete",
       "seed": "hetzner storage"
@@ -95,6 +83,12 @@
       "score": 1000,
       "source": "google_us_autocomplete",
       "seed": "azure egress"
+    },
+    {
+      "query": "cloudflare r2 vs s3",
+      "score": 1000,
+      "source": "google_us_autocomplete",
+      "seed": "cloudflare r2 vs"
     },
     {
       "query": "azure egress charges",
@@ -185,6 +179,12 @@
       "score": 600,
       "source": "google_us_autocomplete",
       "seed": "cloud egress"
+    },
+    {
+      "query": "aws s3 egress",
+      "score": 600,
+      "source": "google_us_autocomplete",
+      "seed": "aws s3 egress"
     }
   ]
 }
