@@ -335,6 +335,12 @@
   "observed_gsc_queries": [
     {
       "query": "cloudflare r2 vs aws s3",
+      "score": 1252,
+      "source": "google_us_autocomplete",
+      "seed": "cloudflare r2 vs"
+    },
+    {
+      "query": "cloudflare r2 vs s3",
       "score": 1251,
       "source": "google_us_autocomplete",
       "seed": "cloudflare r2 vs"
@@ -410,12 +416,6 @@
       "score": 1000,
       "source": "google_us_autocomplete",
       "seed": "azure egress"
-    },
-    {
-      "query": "cloudflare r2 vs s3",
-      "score": 1000,
-      "source": "google_us_autocomplete",
-      "seed": "cloudflare r2 vs"
     },
     {
       "query": "azure egress charges",
